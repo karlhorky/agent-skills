@@ -144,7 +144,7 @@ const imgs = lis.map((li) => {
 const memes = imgs.map((img, index) => {
   return {
     src: img.getAttribute('src')!,
-    caption: lis[index]!.querySelector('.caption')?.textContent.trim() || '',
+    caption: lis[index]!.querySelector('.caption')?.textContent?.trim() || '',
   };
 });
 ```
@@ -155,7 +155,7 @@ After:
 const memes = selectAll('li.meme').map((li) => {
   return {
     src: li.querySelector('img')!.getAttribute('src')!,
-    caption: li.querySelector('.caption')?.textContent.trim() || '',
+    caption: li.querySelector('.caption')?.textContent?.trim() || '',
   };
 });
 ```
