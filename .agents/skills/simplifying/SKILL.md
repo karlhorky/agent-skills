@@ -121,6 +121,12 @@ TODO: Examples
 
 TODO: Examples
 
+### Reduce complexity: Terse comments
+
+Many code comments can follow a simple format of `<verb> <noun> <reason>` to reduce the cognitive load and effort of reading, understanding and maintaining them.
+
+TODO: Examples
+
 ### Reduce duplication: Avoid duplicated identifiers for same collection of objects
 
 As code grows, it is common to accidentally keep multiple 1-to-1 collections that refer to the same underlying items (often an "intermediate" list like nodes or paths plus a "derived" list like images, titles, or hrefs), which quietly creates a synchronization obligation and makes later changes brittle.
