@@ -125,7 +125,7 @@ TODO: Examples
 
 Many code comments can follow a simple format of `<verb> <noun> <reason>` to reduce the cognitive load and effort of reading, understanding and maintaining them.
 
-See the `code-comments` skill for both comment shapes, the verbs to use for failures and the exception for long background comments.
+See the `code-comments` skill for action and fact forms, verbs to use for failures and long background comments.
 
 ### Reduce duplication: Avoid duplicated identifiers for same collection of objects
 
