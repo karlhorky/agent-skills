@@ -165,9 +165,9 @@ Start actions with a verb followed by affected records or entities. Start facts 
 Good:
 
 ```sql
--- Exclude Tech Fundamentals Foundations (Immersive) cohorts, which
--- never had graduation events, so their certificates have no end
--- date to print
+-- Exclude Tech Fundamentals Foundations (Immersive) cohorts,
+-- which currently have no end date for certificates (no
+-- graduation events)
 ```
 
 #### Example 2 (bad): put a generic condition first
