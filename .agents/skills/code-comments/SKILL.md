@@ -116,6 +116,40 @@ Good:
 // list, which makes those records auditable
 ```
 
+### Put debugging details first
+
+Comments are often read while debugging, so two things are critical for speed of scanning:
+
+1. The first word of the comment
+2. The words near the start of the comment
+
+Start actions with a verb followed by affected records or entities. Start facts with affected records or entities. Put generic conditions and reasons afterward.
+
+#### Example 1: name affected records first
+
+Good:
+
+```sql
+-- Tech Fundamentals Foundations (Immersive) cohorts never had
+-- graduation events, so their certificates have no end date to
+-- print and are not returned
+```
+
+#### Example 2: put a generic condition first
+
+Bad:
+
+```sql
+-- Return no certificate for Immersive cohorts with no graduation event,
+-- because there is no end date to print - currently only Tech
+-- Fundamentals Foundations (Immersive) cohorts
+```
+
+Why bad:
+
+- Names the affected cohorts on the last line
+- Starts with a generic condition that does not identify the affected cohorts
+
 ### Name failures with `Avoid` or `Prevent`
 
 Start workaround, guard and fallback comments with `Avoid` or `Prevent`. Name the failure before the mechanism.
