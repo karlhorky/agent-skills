@@ -78,7 +78,7 @@ Why bad:
 
 Use this form when nearby code expresses the action and the comment only needs to state its reason or behavior.
 
-#### Example 1: state a SafeQL limitation
+#### Example 1: state a fact without the action
 
 Good:
 
@@ -88,7 +88,7 @@ Good:
 // - https://github.com/ts-safeql/safeql/issues/269
 ```
 
-#### Example 2: state PostgreSQL aggregate behavior
+#### Example 2: state a fact without the action
 
 Good:
 
@@ -98,7 +98,7 @@ Good:
 -- - https://www.postgresql.org/docs/current/functions-aggregate.html#:~:text=It%20should%20be,null%20when%20necessary.
 ```
 
-#### Example 3: state a record rule and its reason
+#### Example 3: state a fact without the action
 
 Good:
 
@@ -107,7 +107,7 @@ Good:
 -- no campus services are provided with Flex
 ```
 
-#### Example 4: state browser behavior and its consequence
+#### Example 4: state a fact without the action
 
 Good:
 
