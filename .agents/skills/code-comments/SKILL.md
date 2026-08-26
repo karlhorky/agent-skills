@@ -10,7 +10,7 @@ description: Use when writing or editing code comments in any language
 Write comments for what the code does not express, usually a reason or behavior. Most comments take one of three forms:
 
 1. Action: start with an imperative verb
-2. Fact: start with the subject whose behavior the comment explains
+2. Fact: omit the action and state a reason or behavior with its subject first
 3. Description: use a noun phrase for what a schema column or type field stores
 
 Write actions as `<verb> <noun> <reason>`. Common words before an explicit reason include `because`, `so`, `so that`, `to` and `for`.
@@ -43,7 +43,7 @@ Good:
 -- Cast to jsonb because SafeQL cannot figure out the type of subqueries
 ```
 
-#### Example 3: state a selection condition
+#### Example 3: connect an explicit reason with `for`
 
 Good:
 
@@ -52,16 +52,16 @@ Good:
 -- courses.course_format_id of the outer record
 ```
 
-#### Example 4: wrap a long reason
+#### Example 4: connect an explicit reason with `to`
 
 Good:
 
 ```ts
-// Reuse auth from selectCandidateForFusionCandidate without
+// Reuse auth from selectCandidateForFusionCandidate to avoid
 // duplicating the code and making it harder to maintain
 ```
 
-#### Example 5: start with filler
+#### Example 5 (bad): start with filler
 
 Bad:
 
@@ -76,7 +76,7 @@ Why bad:
 
 ### Start facts with the subject
 
-Use this form when the comment describes how an external system, library or record behaves rather than what the code does.
+Use this form when nearby code expresses the action and the comment only needs to state its reason or behavior.
 
 #### Example 1: state a SafeQL limitation
 
@@ -170,7 +170,7 @@ Good:
 -- print and are not returned
 ```
 
-#### Example 2: put a generic condition first
+#### Example 2 (bad): put a generic condition first
 
 Bad:
 
@@ -219,7 +219,7 @@ Good:
 // Prevent parallel runs from deleting each other's records
 ```
 
-#### Example 4: start with the mechanism
+#### Example 4 (bad): start with the mechanism
 
 Bad:
 
@@ -254,7 +254,7 @@ Good:
 -- Ordering by events.id required for SELECT DISTINCT ON
 ```
 
-#### Example 3: use a vague noun
+#### Example 3 (bad): use a vague noun
 
 Bad:
 
