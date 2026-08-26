@@ -160,7 +160,7 @@ Comments are often read while debugging, so two things are critical for speed of
 
 Start actions with a verb followed by affected records or entities. Start facts with affected records or entities. Put generic conditions and reasons afterward.
 
-#### Example 1: name affected records first
+#### Example 1: action verb directly followed by affected records
 
 Good:
 
@@ -187,19 +187,17 @@ Why bad:
 
 ### Name failures with `Avoid` or `Prevent`
 
-Start workaround, guard and fallback comments with `Avoid` or `Prevent`. Name the failure before the action.
+Start workaround, guard and fallback comments with `Avoid` or `Prevent`. Follow the action form above, naming the failure before the reason (`<Avoid/Prevent> <failure> <reason>`). Common words before the reason include `by` and `with`.
 
-#### Example 1: name a user-visible failure
+#### Example 1: name the failure before the reason
 
 Good:
 
-```sql
--- Avoid failing signup when the browser reports a time zone missing
--- from time_zones, falling back to 'Etc/UTC' to keep those records
--- auditable
+```ts
+// Prevent parallel runs from deleting each other's records
 ```
 
-#### Example 2: name a test failure
+#### Example 2: name the failure before the reason
 
 Good:
 
@@ -211,15 +209,16 @@ Good:
 // Version
 ```
 
-#### Example 3: name a prevented failure
+#### Example 3: name the failure before the reason
 
 Good:
 
-```ts
-// Prevent parallel runs from deleting each other's records
+```sql
+-- Avoid signup failure when the browser reports a time zone missing
+-- from time_zones by falling back to 'Etc/UTC'
 ```
 
-#### Example 4 (bad): start with the action
+#### Example 4 (bad): start with the fallback
 
 Bad:
 
@@ -229,8 +228,8 @@ Bad:
 
 Why bad:
 
-- Starts with the action instead of the signup failure
-- Omits the missing time zone and auditability reasons
+- Starts with the fallback instead of the failure
+- Omits the missing time zone reason
 
 ### Name exact identifiers
 
