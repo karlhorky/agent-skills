@@ -7,12 +7,13 @@ description: Use when writing or editing code comments in any language
 
 ## Overview
 
-Write comments for what the code does not express, usually a reason or behavior. Most comments take one of two forms:
+Write comments for what the code does not express, usually a reason or behavior. Most comments take one of three forms:
 
 1. Action: start with an imperative verb
 2. Fact: start with the subject whose behavior the comment explains
+3. Description: use a noun phrase for what a schema column or type field stores
 
-Write actions as `<verb> <noun> <reason>`. Connect an explicit reason with a common connector such as `because`, `so`, `so that`, `to` or `for`.
+Write actions as `<verb> <noun> <reason>`. Common words before an explicit reason include `because`, `so`, `so that`, `to` and `for`.
 
 Exceptions:
 
@@ -114,6 +115,40 @@ Good:
 // Browsers report the canonical 'UTC', never 'Etc/UTC', so this is only
 // ever stored when a signup or login sent a time zone missing from this
 // list, which makes those records auditable
+```
+
+### Describe columns and fields with a noun phrase
+
+Descriptions sit directly above the column or field, so omit its identifier and a verb. Use TSDoc `/** */` on type fields for editor hovers, and repeat the text as a `--` comment above matching `CREATE TABLE` columns. Add a reason only for a non-obvious purpose.
+
+#### Example 1: describe a type field
+
+Good:
+
+```ts
+/** Country subdivision (province or state) */
+subdivision: string | null;
+```
+
+#### Example 2: describe a matching database column
+
+Good:
+
+```sql
+-- Country subdivision (province or state)
+subdivision varchar(80),
+```
+
+#### Example 3: add a non-obvious reason
+
+Good:
+
+```ts
+/**
+ * Assessor's time zone at the moment of assessment, so the
+ * certificate prints the same date for every viewer
+ */
+timeZoneId: TimeZone['id'];
 ```
 
 ### Put debugging details first
