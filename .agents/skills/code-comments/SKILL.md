@@ -109,9 +109,8 @@ Bad:
 
 Why bad:
 
-- Starts with the fallback mechanism
-- Places the signup failure in the middle
-- Ends with date-specific provenance
+- Starts with the fallback mechanism instead of the signup failure
+- Ends with source history instead of the condition that causes the failure
 
 ### Name exact identifiers
 
@@ -135,7 +134,7 @@ Bad:
 
 ### Use comment prefixes
 
-Use a prefix for a recognized comment class: `TODO:`, `FIXME:`, `Security:`, `Note:`, `Source:`, `Caveats:`
+Use `TODO:` for a required future action, `Security:` for a security constraint, `Note:` for background and `Source:` for a link or quote.
 
 Good:
 
@@ -151,11 +150,11 @@ Good:
 // Source: https://developers.google.com/meet/api/guides/overview#meeting-code
 ```
 
-State the required action after `TODO:`, not only the problem.
-
 ### Use long comments for background
 
 Use a long comment only when complex or intermittent behavior requires history to prevent reopening a resolved decision. Separate paragraphs with a bare comment marker, prefix quotes with `>` and end with a `Source:` link.
+
+Good:
 
 ```sql
 -- Note: The Google Meet REST API documentation recommends against
