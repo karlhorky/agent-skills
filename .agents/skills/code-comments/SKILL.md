@@ -139,7 +139,7 @@ Good:
 subdivision varchar(80),
 ```
 
-#### Example 3: add a non-obvious reason
+#### Example 3: describe a TypeScript property and add a non-obvious reason
 
 Good:
 
