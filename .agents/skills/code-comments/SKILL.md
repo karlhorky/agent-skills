@@ -11,7 +11,7 @@ Write comments for what the code does not express, usually a reason or behavior.
 
 1. Action: start with an imperative verb
 2. Fact: omit the action and state a reason or behavior with its subject first
-3. Description: use a noun phrase for what a schema column or type field stores
+3. Description: use a noun phrase for what a database field or TypeScript property stores
 
 Write actions as `<verb> <noun> <reason>`. Common words before an explicit reason include `because`, `so`, `so that`, `to` and `for`.
 
@@ -117,11 +117,11 @@ Good:
 // list, which makes those records auditable
 ```
 
-### Describe columns and fields with a noun phrase
+### Describe database fields and TypeScript properties with a noun phrase
 
-Write column and type field descriptions directly above their declarations, omitting the identifier and verb. Use TSDoc `/** */` on type fields for editor integration such as documentation on hover, and repeat the text as a `--` comment above matching `CREATE TABLE` columns. Add a reason only for a non-obvious purpose.
+Write database field and TypeScript property descriptions directly above their declarations, omitting the identifier and verb. Use TSDoc `/** */` on TypeScript properties for editor integration such as documentation on hover, and repeat the text as a `--` comment above the matching field in `CREATE TABLE`. Add a reason only for a non-obvious purpose.
 
-#### Example 1: describe a type field
+#### Example 1: describe a TypeScript property
 
 Good:
 
@@ -130,7 +130,7 @@ Good:
 subdivision: string | null;
 ```
 
-#### Example 2: describe a matching database column
+#### Example 2: describe a matching database field
 
 Good:
 
@@ -234,11 +234,11 @@ Why bad:
 
 ### Name exact identifiers
 
-Name exact tables, columns, functions and types so comments remain searchable. Avoid vague nouns such as "the date field":
+Name exact tables, database fields, functions and types so comments remain searchable. Avoid vague nouns such as "the date field":
 
-If multiple identifiers could be used, use the one closest to the comment. For example, in a React component, name the field it reads (`campusCity`), while in a SQL query or table definition, name the column it uses (`cohorts.campus_id`) so readers can search the current file.
+If multiple identifiers could be used, use the one closest to the comment. For example, in a React component, name the field it reads (`campusCity`), while in a SQL query or table definition, name the database field it uses (`cohorts.campus_id`) so readers can search the current file.
 
-#### Example 1: name a table column
+#### Example 1: name a table field
 
 Good:
 
@@ -246,7 +246,7 @@ Good:
 -- Include enrolled_cohorts.end_date for ORDER BY clause
 ```
 
-#### Example 2: name an ordering column
+#### Example 2: name an ordering field
 
 Good:
 
