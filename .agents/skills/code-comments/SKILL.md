@@ -119,7 +119,7 @@ Good:
 
 ### Describe columns and fields with a noun phrase
 
-Descriptions sit directly above the column or field, so omit its identifier and a verb. Use TSDoc `/** */` on type fields for editor hovers, and repeat the text as a `--` comment above matching `CREATE TABLE` columns. Add a reason only for a non-obvious purpose.
+Write column and type field descriptions directly above their declarations, omitting the identifier and verb. Use TSDoc `/** */` on type fields for editor integration such as documentation on hover, and repeat the text as a `--` comment above matching `CREATE TABLE` columns. Add a reason only for a non-obvious purpose.
 
 #### Example 1: describe a type field
 
@@ -187,7 +187,7 @@ Why bad:
 
 ### Name failures with `Avoid` or `Prevent`
 
-Start workaround, guard and fallback comments with `Avoid` or `Prevent`. Name the failure before the mechanism.
+Start workaround, guard and fallback comments with `Avoid` or `Prevent`. Name the failure before the action.
 
 #### Example 1: name a user-visible failure
 
@@ -219,7 +219,7 @@ Good:
 // Prevent parallel runs from deleting each other's records
 ```
 
-#### Example 4 (bad): start with the mechanism
+#### Example 4 (bad): start with the action
 
 Bad:
 
@@ -229,7 +229,7 @@ Bad:
 
 Why bad:
 
-- Starts with the fallback mechanism instead of the signup failure
+- Starts with the action instead of the signup failure
 - Omits the missing time zone and auditability reasons
 
 ### Name exact identifiers
