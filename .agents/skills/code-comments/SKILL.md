@@ -151,7 +151,7 @@ Good:
 timeZoneId: TimeZone['id'];
 ```
 
-### Put debugging details first
+### Put debugging details first for scannability
 
 Comments are often read while debugging, so two things are critical for speed of scanning:
 
@@ -184,6 +184,45 @@ Why bad:
 
 - Names the affected cohorts on the last line
 - Starts with a generic condition that does not identify the affected cohorts
+
+### Use comment prefixes for scannability
+
+Use prefixes so readers can recognize the purpose of a comment before reading the rest of it: `TODO:` for a required future action, `FIXME:` for something broken that requires a future fix, `Security:` for a security constraint and `Source:` for a link or quote.
+
+#### Example 1: state a required action with `TODO:` prefix
+
+Good:
+
+```ts
+// TODO: Convert sort_order to a self-referencing foreign key
+// to create a data structure similar to a linked list
+```
+
+#### Example 2: mark something broken with `FIXME:` prefix
+
+Good:
+
+```ts
+// FIXME: Remove workaround when webpack / Next.js issue fixed
+// https://github.com/vercel/next.js/issues/60879
+```
+
+#### Example 3: state a security reason with `Security:` prefix
+
+Good:
+
+```sql
+-- Security: Avoid exposing the private URL
+-- unnecessarily by returning a boolean
+```
+
+#### Example 4: cite a link with `Source:` prefix
+
+Good:
+
+```sql
+-- Source: https://developers.google.com/meet/api/guides/overview#meeting-code
+```
 
 ### Name failures with `Avoid` or `Prevent`
 
@@ -233,11 +272,11 @@ Why bad:
 
 ### Name exact identifiers
 
-Name exact tables, database fields, functions and types so comments remain searchable. Avoid vague nouns such as "the date field":
+Name exact tables, database fields, functions, variables, types, etc. so comments remain searchable. Avoid vague nouns such as "the date field".
 
 If multiple identifiers could be used, use the one closest to the comment. For example, in a React component, name the field it reads (`campusCity`), while in a SQL query or table definition, name the database field it uses (`cohorts.campus_id`) so readers can search the current file.
 
-#### Example 1: name a table field
+#### Example 1: name a database field
 
 Good:
 
@@ -245,12 +284,13 @@ Good:
 -- Include enrolled_cohorts.end_date for ORDER BY clause
 ```
 
-#### Example 2: name an ordering field
+#### Example 2: name a TypeScript property
 
 Good:
 
-```sql
--- Ordering by events.id required for SELECT DISTINCT ON
+```ts
+// Use campusCity for the certificate location because this component
+// does not have access to cohorts.campus_id
 ```
 
 #### Example 3 (bad): use a vague noun
@@ -261,39 +301,9 @@ Bad:
 -- Include the end date so the sorting works
 ```
 
-### Use comment prefixes
-
-Use `TODO:` for a required future action, `Security:` for a security constraint, `Note:` for background and `Source:` for a link or quote.
-
-#### Example 1: state a required action with `TODO:`
-
-Good:
-
-```ts
-// TODO: Convert sort_order to a self-referencing foreign key
-// to create a data structure similar to a linked list
-```
-
-#### Example 2: state a security reason with `Security:`
-
-Good:
-
-```sql
--- Security: Avoid exposing the private URL
--- unnecessarily by returning a boolean
-```
-
-#### Example 3: cite a link with `Source:`
-
-Good:
-
-```sql
--- Source: https://developers.google.com/meet/api/guides/overview#meeting-code
-```
-
 ### Use long comments for background
 
-Use a long comment only when complex or intermittent behavior requires history to prevent reopening a resolved decision. Separate paragraphs with a bare comment marker, prefix quotes with `>` and end with a `Source:` link.
+Use a long comment only when complex or intermittent behavior requires history to prevent reopening a resolved decision. Separate paragraphs with a bare comment marker, prefix quotes with `>`, surround code blocks with `` ``` `` and end with a `Source:` link.
 
 #### Example 1: quote external documentation
 
