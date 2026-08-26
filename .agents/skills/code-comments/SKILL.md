@@ -236,6 +236,8 @@ Why bad:
 
 Name exact tables, columns, functions and types so comments remain searchable. Avoid vague nouns such as "the date field":
 
+If multiple identifiers could be used, use the one closest to the comment. For example, in a React component, name the field it reads (`campusCity`), while in a SQL query or table definition, name the column it uses (`cohorts.campus_id`) so readers can search the current file.
+
 #### Example 1: name a table column
 
 Good:
