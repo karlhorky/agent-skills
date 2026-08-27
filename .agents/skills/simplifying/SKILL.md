@@ -19,6 +19,76 @@ Assume your changes were made with zero knowledge of the codebase code style and
 
 ## Examples of Simplification
 
+### Reduce complexity: Consider system changes when new work adds complexity
+
+New work may seem to require a branch, flag, field, second test, or other structure. Before adding it, check whether a change elsewhere in the system would avoid the extra complexity. Existing fixtures, values, APIs, and control flow are not always fixed.
+
+Before:
+
+The existing student has no student assessment. Keeping that fixture requires another student and another test. Both tests also need longer names to distinguish them:
+
+```diff
+ const testStudent = {
+   user: { email: testUsers.oliviaWagner.email, password: 'asdf' },
+   enrollments: {
+     pernExtensiveFlex: { rootSlug: 'pern-extensive-flex-winter-2025-eu' },
+   },
+ };
+
++const testStudentWithAssessment = {
++  user: { email: testUsers.lenaKovac.email, password: 'asdf' },
++  enrollments: {
++    pernExtensiveFlex: { rootSlug: 'pern-extensive-flex-winter-2025-eu' },
++  },
++  studentAssessment:
++    testStudentAssessments.lenaKovacPernExtensiveFlexWinter2025EuFinalAssessment,
++};
++
+-test('PERN Extensive (Flex) student browses', async ({ page }) => {
++test('PERN Extensive (Flex) student browses course and appointments', async ({
++  page,
++}) => {
+   // logs in, browses the course, a lecture and a project
+ });
++
++test('PERN Extensive (Flex) student browses student assessment and certificate', async ({
++  page,
++}) => {
++  // logs in again, as a different student
++  // browses the student assessment and certificate
++});
+```
+
+After:
+
+Another student in the same cohort has a student assessment. Switching the fixture to that student keeps one test, retains its original name, and lets the same flow continue through the assessment and certificate:
+
+```diff
+ const testStudent = {
+-  user: { email: testUsers.oliviaWagner.email, password: 'asdf' },
++  user: { email: testUsers.lenaKovac.email, password: 'asdf' },
+   enrollments: {
+     pernExtensiveFlex: { rootSlug: 'pern-extensive-flex-winter-2025-eu' },
+   },
++  studentAssessment:
++    testStudentAssessments.lenaKovacPernExtensiveFlexWinter2025EuFinalAssessment,
+ };
+
+ test('PERN Extensive (Flex) student browses', async ({ page }) => {
+   // logs in, browses the course, a lecture and a project
++  // browses the student assessment and certificate
+ });
+```
+
+The coverage requires one student with an assessment, not two students and two tests.
+
+Consider before adding structure:
+
+- Which existing choice requires this structure?
+- Is that choice required?
+- What depends on it?
+- Would changing it leave the system simpler overall?
+
 ### Reduce complexity: Eliminate unnecessary variables
 
 As code evolves, it is easy to accumulate single-use variables added for "readability", but they rarely make code easier to read and increase cognitive load:
@@ -120,76 +190,6 @@ TODO: Examples
 ### Reduce complexity: Reorder code to avoid steps altogether
 
 TODO: Examples
-
-### Reduce complexity: Consider system changes when new work adds complexity
-
-New work may seem to require a branch, flag, field, second test, or other structure. Before adding it, check whether a change elsewhere in the system would avoid the extra complexity. Existing fixtures, values, APIs, and control flow are not always fixed.
-
-Before:
-
-The existing student has no student assessment. Keeping that fixture requires another student and another test. Both tests also need longer names to distinguish them:
-
-```diff
- const testStudent = {
-   user: { email: testUsers.oliviaWagner.email, password: 'asdf' },
-   enrollments: {
-     pernExtensiveFlex: { rootSlug: 'pern-extensive-flex-winter-2025-eu' },
-   },
- };
-
-+const testStudentWithAssessment = {
-+  user: { email: testUsers.lenaKovac.email, password: 'asdf' },
-+  enrollments: {
-+    pernExtensiveFlex: { rootSlug: 'pern-extensive-flex-winter-2025-eu' },
-+  },
-+  studentAssessment:
-+    testStudentAssessments.lenaKovacPernExtensiveFlexWinter2025EuFinalAssessment,
-+};
-+
--test('PERN Extensive (Flex) student browses', async ({ page }) => {
-+test('PERN Extensive (Flex) student browses course and appointments', async ({
-+  page,
-+}) => {
-   // logs in, browses the course, a lecture and a project
- });
-+
-+test('PERN Extensive (Flex) student browses student assessment and certificate', async ({
-+  page,
-+}) => {
-+  // logs in again, as a different student
-+  // browses the student assessment and certificate
-+});
-```
-
-After:
-
-Another student in the same cohort has a student assessment. Switching the fixture to that student keeps one test, retains its original name, and lets the same flow continue through the assessment and certificate:
-
-```diff
- const testStudent = {
--  user: { email: testUsers.oliviaWagner.email, password: 'asdf' },
-+  user: { email: testUsers.lenaKovac.email, password: 'asdf' },
-   enrollments: {
-     pernExtensiveFlex: { rootSlug: 'pern-extensive-flex-winter-2025-eu' },
-   },
-+  studentAssessment:
-+    testStudentAssessments.lenaKovacPernExtensiveFlexWinter2025EuFinalAssessment,
- };
-
- test('PERN Extensive (Flex) student browses', async ({ page }) => {
-   // logs in, browses the course, a lecture and a project
-+  // browses the student assessment and certificate
- });
-```
-
-The coverage requires one student with an assessment, not two students and two tests.
-
-Consider before adding structure:
-
-- Which existing choice requires this structure?
-- Is that choice required?
-- What depends on it?
-- Would changing it leave the system simpler overall?
 
 ### Reduce complexity: Terse comments
 
